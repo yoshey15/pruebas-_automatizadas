@@ -40,24 +40,23 @@ public class BasePage {
     }
 
     private static void initializeDriver() {
-        if (driver == null) {
-            WebDriverManager.chromedriver().setup();
+    if (driver == null) {
+        WebDriverManager.chromedriver().setup();
 
-            ChromeOptions options = new ChromeOptions();
+        ChromeOptions options = new ChromeOptions();
 
-            // Detectar si estamos en CI (GitHub Actions define esta variable)
-            String ci = System.getenv("CI");
-            if (ci != null && ci.equals("true")) {
-                options.addArguments("--headless");
-                options.addArguments("--no-sandbox");
-                options.addArguments("--disable-dev-shm-usage");
-            }
-
-            driver = new ChromeDriver(options);
-            driver.manage().window().maximize();
+        String ci = System.getenv("CI");
+        if (ci != null && ci.equals("true")) {
+            options.addArguments("--headless");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            options.addArguments("--window-size=1920,1080"); // <-- esto
         }
-    }
 
+        driver = new ChromeDriver(options); 
+        driver.manage().window().maximize();
+    }
+}
     public static WebDriver getDriver() {
         initializeDriver();
         return driver;
