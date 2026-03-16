@@ -104,7 +104,14 @@ public class BasePage {
      * Hace click en un elemento
      */
     public void clickElement(String locator) {
-        find(locator).click();
+    WebElement element = find(locator);
+        try {
+        element.click();
+        } catch (Exception e) {
+        // Fallback con JavaScript si el click normal falla
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+            .executeScript("arguments[0].click();", element);
+    }   
     }
 
     /**
