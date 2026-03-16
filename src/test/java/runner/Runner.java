@@ -27,7 +27,7 @@ import pages.BasePage;
 public class Runner {
     
     /**
-     * Método que se ejecuta DESPUÉS de todas las pruebas
+     * Método que se ejecutad DESPUÉS de todas las pruebas
      * Cierra el navegador y termina la sesión de Selenium
      */
     @AfterClass
